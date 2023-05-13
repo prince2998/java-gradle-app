@@ -22,14 +22,16 @@ pipeline{
             }
         }
         stage("Build docker images and push to Nexus"){
-            script{
-               withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_pass_var')]) {
-                    sh '''
-                    docker build -t $DOCKER_HOSTED_EP/javawebapp:${VERSION} .
-                    docker login -u admin -p $nexus_pass_var $DOCKER_HOSTED_EP
-                    docker push $DOCKER_HOSTED_EP/javawebappapp:${VERSION}
-                    docker rmi $DOCKER_HOSTED_EP/javawebapp:${VERSION}
-                    '''
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus_pass', variable: 'nexus_pass_var')]) {
+                        sh '''
+                        docker build -t $DOCKER_HOSTED_EP/javawebapp:${VERSION} .
+                        docker login -u admin -p $nexus_pass_var $DOCKER_HOSTED_EP
+                        docker push $DOCKER_HOSTED_EP/javawebappapp:${VERSION}
+                        docker rmi $DOCKER_HOSTED_EP/javawebapp:${VERSION}
+                        '''
+                    }
                 }
             }
         }
