@@ -50,7 +50,7 @@ pipeline{
                 }
             }
         }
-        stage("Pushing Helm Charts to Nexus Repo"){
+        stage("Push Helm Charts to Nexus Repo"){
             steps{
                 script{
                     dir('kubernetes/'){
