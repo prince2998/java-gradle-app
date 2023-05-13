@@ -65,6 +65,15 @@ pipeline{
                 }
             }
         }
+        stage('Deploy application on k8s-cluster') {
+            steps {
+                script{
+                    dir ("kubernetes/"){  
+				        sh 'helm upgrade --install --set image.repository="$DOCKER_HOSTED_EP/javawebapp" --set image.tag="${VERSION}" jwa1 myapp/ ' 
+			        }   
+                }
+            }
+        }
     }    
     post {
 	    always {
