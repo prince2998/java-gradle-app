@@ -89,7 +89,7 @@ pipeline{
             steps {
                 script{
                     dir ("kubernetes/"){  
-				        sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl myjavaapp-myapp:8080 ' 
+				        sh 'kubectl run curl --image=curlimages/curl -i --rm --restart=Never -- curl jwa1-myapp:8080 ' 
 			        }   
                 }
             }
